@@ -1,6 +1,6 @@
 import PrivateRoute from "./PrivateRoute"
 import LogIn from "../auth/pages/LogIn"
-import { Route, Routes, useNavigate } from 'react-router';
+import { Route,  Routes, useNavigate } from 'react-router';
 import SignIn from "../auth/pages/SignIn";
 import DashboardLayoutBasic from "../layout/DashboardLayout";
 import ReportsForm from "../reports/pages/ReportsForm";
