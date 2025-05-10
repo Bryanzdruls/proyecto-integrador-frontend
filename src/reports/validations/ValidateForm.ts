@@ -1,5 +1,4 @@
-import { ReportFormDataInterface } from "../../interfaces/ReportFormDataInterface";
-
+import { ReportFormDataInterface } from "../interfaces/ReportFormDataInterface";
 
 export const validateForm = (formData: ReportFormDataInterface) => {
   let formErrors: any = {};
