@@ -1,12 +1,15 @@
 import { CssVarsProvider } from '@mui/joy';
 import './App.css';
 import { AppRouter } from './router/Router';
+import { BrowserRouter } from 'react-router';
 
 function App() {
 
   return (
     <CssVarsProvider>
-      <AppRouter/>
+      <BrowserRouter>
+        <AppRouter/>
+      </BrowserRouter>
     </CssVarsProvider>
   )
 }
