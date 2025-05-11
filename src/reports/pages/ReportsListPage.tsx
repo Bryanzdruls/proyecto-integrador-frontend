@@ -141,16 +141,10 @@ export default function ReportListPage() {
               onChange={handleChange}
               fullWidth
             />
-            {selectedReport.attachment && (
-              <Box>
-                <Typography variant="body2">Archivo adjunto:</Typography>
-                <a
-                  href={`data:application/octet-stream;base64,${selectedReport.attachment}`}
-                  download={`reporte-${selectedReport.idReport}.bin`}
-                >
-                  Descargar archivo
-                </a>
-              </Box>
+             {selectedReport.attachment && (
+              <a href={selectedReport.attachment} target="_blank" rel="noopener noreferrer">
+              Ver adjunto
+              </a>
             )}
             <Box>
               <Button onClick={handleSave} variant="contained" sx={{ mr: 2 }}>
@@ -188,10 +182,20 @@ export default function ReportListPage() {
                 <TableCell>{report.date?.toString() ?? 'No aplica'}</TableCell>
                 <TableCell>{report.type}</TableCell>
                 <TableCell>{report.urgency}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleEditClick(report)} variant="contained">
-                    Editar
-                  </Button>
+                <TableCell>                
+                  {
+                    selectedReport ? 
+                    (
+                      <Button onClick={() => setSelectedReport(null)} variant="outlined">
+                        Cancelar
+                      </Button>
+                    ):
+                    (
+                      <Button onClick={() => handleEditClick(report)} variant="contained">
+                        Editar
+                      </Button>
+                    )
+                  } 
                 </TableCell>
               </TableRow>
             ))}

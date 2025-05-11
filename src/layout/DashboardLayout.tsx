@@ -51,8 +51,8 @@ export default function DashboardLayoutBasic() {
     });
   const [session, setSession] = React.useState<any>({
     user: {
-      name: 'Usuario',
-      email: "whatever",
+      name: role,
+      email: localStorage.getItem('session') ??'',
       image: 'https://avatars.githubusercontent.com/u/19550456',
     },
   });

@@ -15,6 +15,7 @@ import { getAllUsersService } from '../services/GetAllUsersServices';
 import { UserInterface } from '../../shared/interfaces/UserInterface';
 import CustomSnackBar from '../../shared/modals/CustomSnackBar';
 import { updateUsersService } from '../services/UpdateUserService';
+import { downloadUserXmlReportService } from '../services/DownloadUserXmlReportService';
 
 export default function UserListPage() {
   const [users, setUsers] = useState<UserInterface[]>([]);
@@ -126,13 +127,29 @@ export default function UserListPage() {
               onChange={handleChange}
               fullWidth
             />
+           <TextField
+              label="Descuento matrícula pesos"
+              name="rewardValue"
+              type="number"
+              slotProps={{htmlInput: { min: 0, max: 1000000 }}}
+              value={selectedUser.rewardValue ?? ''}
+              onChange={(e) => {
+              const value = parseFloat(e.target.value);
+              if (!isNaN(value) && value >= 0 && value <= 1000000) {
+                setSelectedUser(prev => prev ? { ...prev, rewardValue: value } : prev);
+              } else if (e.target.value === '') {
+                setSelectedUser(prev => prev ? { ...prev, rewardValue: undefined } : prev);
+              }
+              }}
+              fullWidth
+            />
             <TextField
               label="Rol de usuario"
               name="role"
               value={selectedUser.role}
               onChange={handleChange}
               fullWidth
-            />
+            />           
             <Box>
               <Button onClick={handleSave} variant="contained" sx={{ mr: 2 }}>
                 Guardar
@@ -144,10 +161,12 @@ export default function UserListPage() {
           </Box>
         </Paper>
       )}
-      <Typography variant="h4" gutterBottom>
-        Lista de Usuarios
-      </Typography>
-
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+      <Typography variant="h4">Lista de Usuarios</Typography>
+        <Button variant="contained" onClick={downloadUserXmlReportService}>
+          Descargar Reporte
+        </Button>
+      </Box>    
       <Paper sx={{ mb: 4 }}>
         <Table>
           <TableHead>
@@ -155,6 +174,7 @@ export default function UserListPage() {
               <TableCell>Nombre</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Puntaje</TableCell>
+              <TableCell>Descuento Matricula</TableCell>
               <TableCell>Rol</TableCell>
               <TableCell>Acciones</TableCell>
             </TableRow>
@@ -165,6 +185,7 @@ export default function UserListPage() {
                 <TableCell>{user.name ?? 'No registra'}</TableCell>
                 <TableCell>{user.email ?? 'No registra'}</TableCell>
                 <TableCell>{user.score ?? 'No registra'}</TableCell>
+                <TableCell>{user.rewardValue ?? 'No registra'}</TableCell>
                 <TableCell>{user.role ?? 'No registra'}</TableCell>
                 <TableCell>
                   {

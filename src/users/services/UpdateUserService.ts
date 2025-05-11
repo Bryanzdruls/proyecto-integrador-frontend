@@ -14,7 +14,8 @@ export const updateUsersService = async (id:number,body:UserInterface):Promise<R
         name: body.name,
         email: body.email,
         score: body.score,
-        role: body.role
+        role: body.role,
+        rewardValue: body.rewardValue? body.rewardValue : 0,
     } 
     const response = await fetch(`${API}/users/${id}`,{
         method: 'PUT',

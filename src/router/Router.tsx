@@ -1,6 +1,6 @@
 import PrivateRoute from "./PrivateRoute"
 import LogIn from "../auth/pages/LogIn"
-import { Route,  Routes, useNavigate } from 'react-router';
+import { Navigate, Route,  Routes, useNavigate } from 'react-router';
 import SignIn from "../auth/pages/SignIn";
 import DashboardLayoutBasic from "../layout/DashboardLayout";
 import ReportsForm from "../reports/pages/ReportsForm";
@@ -34,6 +34,7 @@ export const AppRouter = () => {
           <Route path="events" element={<EventListPage />} />
         </Route>
       </Route>
+      <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>    
   )
 }

@@ -7,7 +7,7 @@ export interface ReportFormDataInterface {
     type: string;
     companyContactNumber: string;
     urgency: string;
-    attachment: File | null; // Si prefieres manejar el archivo como objeto File, cambia a File
+    attachment: string | null; // Si prefieres manejar el archivo como objeto File, cambia a File
     id_event: number;
   }
 export interface ReportInterface extends ReportFormDataInterface {

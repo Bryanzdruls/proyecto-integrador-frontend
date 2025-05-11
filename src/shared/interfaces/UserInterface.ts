@@ -9,6 +9,7 @@ export interface Authority {
     password: string;
     role: string;
     score: number;
+    rewardValue?: number;
     enabled: boolean;
     username: string;
     authorities: Authority[];
