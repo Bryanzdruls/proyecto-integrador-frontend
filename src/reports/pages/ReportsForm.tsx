@@ -63,7 +63,7 @@ export default function ReportForm() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
+    const file: any = e.target.files ? e.target.files[0] : null;
     setFormData(prev => ({
       ...prev,
       attachment: file,

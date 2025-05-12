@@ -1,6 +1,4 @@
-import { ReportFormDataInterface } from "../interfaces/ReportFormDataInterface";
-
-export const validateForm = (formData: ReportFormDataInterface) => {
+export const validateForm = (formData: any) => {
   let formErrors: any = {};
   let isValid = true;
 
@@ -33,7 +31,6 @@ export const validateForm = (formData: ReportFormDataInterface) => {
     formErrors.urgency = 'La urgencia es obligatoria';
     isValid = false;
   }
-
   // Validación de archivo adjunto
   if (!formData.attachment) {
     formErrors.attachment = 'El archivo adjunto es obligatorio';
