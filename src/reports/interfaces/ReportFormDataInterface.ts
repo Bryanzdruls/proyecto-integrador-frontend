@@ -2,6 +2,7 @@ export interface ReportFormDataInterface {
     idReport?: number;
     userId: number;
     title: string;
+    userEmail?: string;
     description: string;
     date: Date | undefined; // O puedes usar Date si prefieres manejar las fechas como objetos Date
     type: string;

@@ -96,6 +96,14 @@ export default function ReportListPage() {
           <Typography variant="h6">Editar Reporte</Typography>
           <Box sx={{ display: 'grid', gap: 2, mt: 2 }}>
             <TextField
+              label="Email Usuario"
+              name="title"
+              value={selectedReport.userEmail}
+              onChange={handleChange}
+              disabled
+              fullWidth
+            />
+            <TextField
               label="Título"
               name="title"
               value={selectedReport.title}
