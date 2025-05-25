@@ -15,6 +15,7 @@ import CustomSnackBar from '../../shared/modals/CustomSnackBar';
 import { ReportInterface } from '../interfaces/ReportFormDataInterface';
 import { getAllReportsService } from '../services/GetAllReportsService';
 import { getReportByIdService } from '../services/GetReportByIdService';
+import { updateReportService } from '../services/UpdateReportService';
 export default function ReportListPage() {
   const [reports, setReports] = useState<ReportInterface[]>([]);
   const [selectedReport, setSelectedReport] = useState<ReportInterface | null>(null);
@@ -42,20 +43,37 @@ export default function ReportListPage() {
     setSelectedReport((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
 
-  const handleSave = () => {
-    if (selectedReport) {
-      setReports((prev) =>
-        prev.map((r) => (r.idReport === selectedReport.idReport ? selectedReport : r))
-      );
-      setSnackbar({
-        open: true,
-        message: 'Reporte actualizado exitosamente',
-        severity: 'success',
-      });
-      setSelectedReport(null);
-    }
-  };
-
+   const handleSave = async() => {
+      if (selectedReport) {
+        try {
+          const response = await updateReportService(selectedReport.idReport, selectedReport);
+          if (response.ok) {
+            setReports((prev) =>
+              prev.map((r) => (r.idReport === selectedReport.idReport ? selectedReport : r))
+            );      
+            setSelectedReport(null);
+            setSnackbar({
+              open: true,
+              message: 'Reporte editado correctamente',
+              severity: 'success',
+            });          
+          }else{
+            setSnackbar({
+              open: true,
+              message: 'Error al editar el Reporte: ' + response.message,
+              severity: 'error',
+            });
+          }
+        } catch (error) {
+          console.log('Error al editar el Reporte:', error);        
+          setSnackbar({
+            open: true,
+            message: 'Algo salió mal al editar el Reporte.',
+            severity: 'error',
+          });
+        }   
+      }   
+    };
   useEffect(() => {
     const fetchReports = async () => {
       try {
